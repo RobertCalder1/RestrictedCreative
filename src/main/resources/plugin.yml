@@ -1,0 +1,249 @@
+name: RestrictedCreative
+version: 2.5.3
+description: Lightweight, but fully-featured and customizable creative mode limiter
+author: Prunt, Eextr0
+main: eextr0.restrictedcreative.RestrictedCreative
+softdepend: [ProtocolLib, WorldEdit, WorldGuard, Towny, CoreProtect]
+api-version: '1.20'
+
+commands:
+  rc:
+    permission: rc.commands.rc
+  creative:
+    permission: rc.commands.creative
+  survival:
+    permission: rc.commands.survival
+  adventure:
+    permission: rc.commands.adventure
+  spectator:
+    permission: rc.commands.spectator
+
+permissions:
+  rc.*:
+    description: Allows and bypasses everything.
+    default: false
+    children:
+      rc.commands.*: true
+      rc.bypass.*: true
+
+
+  rc.commands.*:
+    description: Allows every command.
+    default: op
+    children:
+      rc.commands.rc: true
+      rc.commands.creative: true
+      rc.commands.survival: true
+      rc.commands.adventure: true
+      rc.commands.spectator: true
+      rc.commands.creative.others: true
+      rc.commands.survival.others: true
+      rc.commands.adventure.others: true
+      rc.commands.spectator.others: true
+      rc.commands.reload: true
+      rc.commands.delete: true
+      rc.commands.block: true
+
+  rc.bypass.*:
+    description: Allows to bypass everything.
+    default: false
+    children:
+      rc.bypass.general.disable-worlds: true
+      rc.bypass.creative.armor: true
+      rc.bypass.creative.permissions: true
+      rc.bypass.creative.groups: true
+      rc.bypass.tracking.blocks: true # per Material enum
+      rc.bypass.tracking.entities: true # per EntityType enum
+      rc.bypass.tracking.worldedit: true
+      rc.bypass.tracking.inventory: true
+      rc.bypass.limit.regions: true
+      rc.bypass.limit.moving: true
+      rc.bypass.limit.interact.inventories: true # per InventoryType enum
+      rc.bypass.limit.interact.entities: true # per EntityType enum
+      rc.bypass.limit.interact.breeding: true # per EntityType enum
+      rc.bypass.limit.interact.slimefun: true
+      rc.bypass.limit.item.drop: true # per Material enum
+      rc.bypass.limit.item.pickup: true # per Material enum
+      rc.bypass.limit.item.throw: true # per Material enum
+      rc.bypass.limit.commands: true # per command
+      rc.bypass.limit.combat.pvp: true
+      rc.bypass.limit.combat.pve: true # per EntityType enum
+      rc.bypass.limit.creation.wither: true
+      rc.bypass.limit.creation.snow-golem: true
+      rc.bypass.limit.creation.iron-golem: true
+      rc.bypass.limit.damage: true
+      rc.bypass.confiscate.invalid-items: true
+      rc.bypass.confiscate.middle-click: true
+      rc.bypass.confiscate.items.material: true # per Material enum
+      rc.bypass.confiscate.items.name: true
+      rc.bypass.confiscate.items.lore: true
+      rc.bypass.disable.placing: true # per Material enum
+      rc.bypass.disable.interacting.in-hand: true # per Material enum
+      rc.bypass.disable.interacting.on-ground: true # per Material enum
+      rc.bypass.disable.breaking: true # per Material enum
+
+  rc.bypass.tracking.inventory:
+    description: Allows to bypass inventory separation.
+    default: false
+    children:
+      rc.bypass.tracking.inventory.contents: true
+      rc.bypass.tracking.inventory.xp: true
+      rc.bypass.tracking.inventory.effects: true
+
+
+  rc.commands.rc:
+    description: Allows to use the main command.
+    default: op
+
+  rc.commands.creative:
+    description: Allows to enter the creative mode.
+    default: op
+  rc.commands.survival:
+    description: Allows to enter the survival mode.
+    default: op
+  rc.commands.adventure:
+    description: Allows to enter the adventure mode.
+    default: op
+  rc.commands.spectator:
+    description: Allows to enter the spectator mode.
+    default: op
+  rc.commands.creative.others:
+    description: Allows to put other players to creative mode.
+    default: op
+  rc.commands.survival.others:
+    description: Allows to put other players to survival mode.
+    default: op
+  rc.commands.adventure.others:
+    description: Allows to put other players to adventure mode.
+    default: op
+  rc.commands.spectator.others:
+    description: Allows to put other players to spectator mode.
+    default: op
+
+  rc.commands.reload:
+    description: Allows to use the reload command.
+    default: op
+  rc.commands.delete:
+    description: Allows to use the delete command.
+    default: op
+  rc.commands.convert:
+    description: Allows to use the conversion command.
+    default: op
+  rc.commands.block:
+    description: Allows to use the block info command.
+    default: op
+
+
+  rc.bypass.general.disable-worlds:
+    description: Allows to go into disabled worlds in creative mode.
+    default: false
+
+  rc.bypass.creative.armor:
+    description: Allows to bypass armor forcing in creative mode.
+    default: false
+  rc.bypass.creative.permissions:
+    description: Allows to bypass permission changing in creative mode.
+    default: false
+  rc.bypass.creative.groups:
+    description: Allows to bypass group changing in creative mode.
+    default: false
+
+  rc.bypass.tracking.blocks:
+    description: Allows to bypass tracking of blocks placed in creative mode.
+    default: false
+  rc.bypass.tracking.blocks.drops:
+    description: Allows to get drops from blocks placed in creative mode.
+    default: false
+  rc.bypass.tracking.entities:
+    description: Allows to bypass tracking of entities created in creative mode.
+    default: false
+  rc.bypass.tracking.worldedit:
+    description: Allows to bypass tracking of blocks placed using WorldEdit.
+    default: false
+  rc.bypass.tracking.inventory.contents:
+    description: Allows to have same inventory contents for both creative and survival.
+    default: false
+  rc.bypass.tracking.inventory.xp:
+    description: Allows to have same XP amount for both creative and survival.
+    default: false
+  rc.bypass.tracking.inventory.effects:
+    description: Allows to have same potion effects for both creative and survival.
+    default: false
+
+  rc.bypass.limit.regions:
+    description: Allows to enter creative mode and place blocks/items outside allowed regions in creative mode.
+    default: false
+  rc.bypass.limit.moving:
+    description: Allows to move below and above disabled Y levels in creative mode.
+    default: false
+  rc.bypass.limit.interact.inventories:
+    description: Allows to interact with inventories in creative mode.
+    default: false
+  rc.bypass.limit.interact.entities:
+    description: Allows to interact with entities in creative mode.
+    default: false
+  rc.bypass.limit.interact.breeding:
+    description: Allows to breed animals in creative mode.
+    default: false
+  rc.bypass.limit.interact.slimefun:
+    description: Allows to interact with Slimefun items in creative mode.
+    default: false
+  rc.bypass.limit.item.drop:
+    description: Allows to drop items in creative mode.
+    default: false
+  rc.bypass.limit.item.pickup:
+    description: Allows to pick items up in creative mode.
+    default: false
+  rc.bypass.limit.item.throw:
+    description: Allows to throw and shoot items in creative mode.
+    default: false
+  rc.bypass.limit.commands:
+    description: Allows to use disabled commands in creative mode.
+    default: false
+  rc.bypass.limit.combat.pvp:
+    description: Allows to hit other players while in creative mode.
+    default: false
+  rc.bypass.limit.combat.pve:
+    description: Allows to hit other entities while in creative mode.
+    default: false
+  rc.bypass.limit.creation.wither:
+    description: Allows to build a Wither while in creative mode.
+    default: false
+  rc.bypass.limit.creation.snow-golem:
+    description: Allows to build a Snow golem while in creative mode.
+    default: false
+  rc.bypass.limit.creation.iron-golem:
+    description: Allows to build an Iron golem while in creative mode.
+    default: false
+  rc.bypass.limit.damage:
+    description: Allows to be damaged and die.
+    default: false
+
+  rc.bypass.confiscate.invalid-items:
+    description: Allows to use invalid items (also items with custom NBT) in creative mode.
+    default: false
+  rc.bypass.confiscate.middle-click:
+    description: Allows to copy inventory contents with middle-click in creative mode.
+    default: false
+  rc.bypass.confiscate.items.material:
+    description: Allows to use items with blacklisted material types in creative mode.
+    default: false
+  rc.bypass.confiscate.items.name:
+    description: Allows to use items with blacklisted names in creative mode.
+    default: false
+  rc.bypass.confiscate.items.lore:
+    description: Allows to use items with blacklisted lores in creative mode.
+    default: false
+
+  rc.bypass.disable.placing:
+    description: Allows to place items/blocks listed in blacklist while in creative mode.
+    default: false
+  rc.bypass.disable.interacting.in-hand:
+    description: Allows to use items in hand listed in blacklist while in creative mode.
+    default: false
+  rc.bypass.disable.interacting.on-ground:
+    description: Allows to interact with blocks on the ground listed in blacklist while in creative mode.
+    default: false
+  rc.bypass.disable.breaking:
+    description: Allows to break items/blocks listed in blacklist while in creative mode.
+    default: false
